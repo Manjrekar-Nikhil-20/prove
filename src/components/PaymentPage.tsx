@@ -297,18 +297,18 @@ const PaymentPage = () => {
   const showSummary = currentStep !== 'summary';
 
   return (
-    <div className="min-h-screen bg-gray-900 py-4 md:py-8 lg:py-12">
-      <div className="container mx-auto px-4 md:px-6">
+    <div className="min-h-screen bg-gray-900 py-4 sm:py-6 md:py-8 lg:py-12">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 mb-6 md:mb-8">
-            <img src="/BINGEN.png" alt="Binge'N Celebration Logo" className="h-8 md:h-10 lg:h-12 w-8 md:w-10 lg:w-12" />
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 md:mb-8">
+            <img src="/BINGEN.png" alt="Binge'N Celebration Logo" className="h-8 sm:h-10 md:h-12 w-8 sm:w-10 md:w-12" />
+            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">
               Complete Your Booking
             </h1>
           </div>
 
           <div
-            className={`grid gap-6 md:gap-8 ${
+            className={`grid gap-4 sm:gap-6 md:gap-8 ${
               showSummary ? 'lg:grid-cols-3' : 'lg:grid-cols-1'
             }`}
           >
@@ -383,8 +383,8 @@ const PaymentPage = () => {
           </div>
 
           {error && (
-            <div className="mt-6 bg-red-500/20 border border-red-500/50 rounded-lg p-4">
-              <p className="text-red-400 text-center" role="alert">
+            <div className="mt-4 sm:mt-6 bg-red-500/20 border border-red-500/50 rounded-lg p-3 sm:p-4">
+              <p className="text-red-400 text-xs sm:text-sm text-center leading-tight" role="alert">
                 {error}
               </p>
             </div>

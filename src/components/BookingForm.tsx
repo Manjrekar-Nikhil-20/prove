@@ -232,15 +232,15 @@ const BookingForm = ({
     <div className="space-y-6">
       {/* Overview Box */}
       <div className="bg-gray-800 rounded-xl p-4 md:p-6">
-        <h2 className="text-xl font-bold text-white mb-4">Overview</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <h2 className="text-lg md:text-xl font-bold text-white mb-4">Overview</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-pink-500/20 rounded-lg flex items-center justify-center">
               <span className="text-pink-500 text-sm">🏢</span>
             </div>
             <div>
-              <p className="text-gray-400 text-sm">Venue</p>
-              <p className="text-white font-medium">{venue.name}</p>
+              <p className="text-gray-400 text-xs sm:text-sm">Venue</p>
+              <p className="text-white font-medium text-sm sm:text-base">{venue.name}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -248,8 +248,8 @@ const BookingForm = ({
               <span className="text-pink-500 text-sm">📅</span>
             </div>
             <div>
-              <p className="text-gray-400 text-sm">Date</p>
-              <p className="text-white font-medium text-xs sm:text-sm">
+              <p className="text-gray-400 text-xs sm:text-sm">Date</p>
+              <p className="text-white font-medium text-xs sm:text-sm leading-tight">
                 {selectedDate ? formatDate(selectedDate) : 'Select date'}
               </p>
             </div>
@@ -259,8 +259,8 @@ const BookingForm = ({
               <span className="text-pink-500 text-sm">⏰</span>
             </div>
             <div>
-              <p className="text-gray-400 text-sm">Slot</p>
-              <p className="text-white font-medium text-xs sm:text-sm">
+              <p className="text-gray-400 text-xs sm:text-sm">Slot</p>
+              <p className="text-white font-medium text-xs sm:text-sm leading-tight">
                 {getSelectedSlotTime() || 'Select slot'}
               </p>
             </div>
@@ -270,21 +270,21 @@ const BookingForm = ({
 
       {/* Rate Limit Error */}
       {rateLimitError && (
-        <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4">
-          <p className="text-red-400 text-sm" role="alert">{rateLimitError}</p>
+        <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-3 sm:p-4">
+          <p className="text-red-400 text-xs sm:text-sm leading-tight" role="alert">{rateLimitError}</p>
         </div>
       )}
 
       {/* Booking Form */}
       <form onSubmit={handleSubmit} className="bg-gray-800 rounded-xl p-4 md:p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-white">Booking Details</h2>
-          <span className="text-sm text-gray-400">1 of 4</span>
+          <h2 className="text-lg md:text-xl font-bold text-white">Booking Details</h2>
+          <span className="text-xs sm:text-sm text-gray-400">1 of 4</span>
         </div>
         
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
               Booking Date*
             </label>
             <input
@@ -298,21 +298,21 @@ const BookingForm = ({
                 }
               }}
               min={new Date().toISOString().split('T')[0]}
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 sm:py-3 px-3 sm:px-4 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-pink-500"
               aria-label="Select booking date"
             />
             {validationErrors.selectedDate && (
-              <p className="text-red-400 text-sm mt-1" role="alert">{validationErrors.selectedDate}</p>
+              <p className="text-red-400 text-xs sm:text-sm mt-1 leading-tight" role="alert">{validationErrors.selectedDate}</p>
             )}
           </div>
 
           {selectedDate && (
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
                 Available Slots*
               </label>
               {slotsLoading ? (
-                <div className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-gray-400">
+                <div className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 sm:py-3 px-3 sm:px-4 text-gray-400 text-sm sm:text-base">
                   Loading available slots...
                 </div>
               ) : (
@@ -320,7 +320,7 @@ const BookingForm = ({
                   required
                   value={formData.slotId}
                   onChange={(e) => handleInputChange('slotId', e.target.value)}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 sm:py-3 px-3 sm:px-4 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-pink-500"
                   aria-label="Select time slot"
                 >
                   <option value="">Select a slot</option>
@@ -332,10 +332,10 @@ const BookingForm = ({
                 </select>
               )}
               {validationErrors.slotId && (
-                <p className="text-red-400 text-sm mt-1" role="alert">{validationErrors.slotId}</p>
+                <p className="text-red-400 text-xs sm:text-sm mt-1 leading-tight" role="alert">{validationErrors.slotId}</p>
               )}
               {slots.length === 0 && !slotsLoading && selectedDate && (
-                <p className="text-red-400 text-sm mt-1">
+                <p className="text-red-400 text-xs sm:text-sm mt-1 leading-tight">
                   No slots available for this date. Please select another date.
                 </p>
               )}
@@ -343,7 +343,7 @@ const BookingForm = ({
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
               Booking Name*
             </label>
             <input
@@ -351,25 +351,25 @@ const BookingForm = ({
               required
               value={formData.bookingName}
               onChange={(e) => handleInputChange('bookingName', e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 sm:py-3 px-3 sm:px-4 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-pink-500"
               placeholder="Enter booking name"
               aria-label="Enter booking name"
               maxLength={50}
             />
             {validationErrors.bookingName && (
-              <p className="text-red-400 text-sm mt-1" role="alert">{validationErrors.bookingName}</p>
+              <p className="text-red-400 text-xs sm:text-sm mt-1 leading-tight" role="alert">{validationErrors.bookingName}</p>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
               Number of Persons*
             </label>
             <select
               required
               value={formData.persons}
               onChange={(e) => handleInputChange('persons', e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 sm:py-3 px-3 sm:px-4 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-pink-500"
               aria-label="Select number of persons"
             >
               {[...Array(venue.base_members)].map((_, i) => (
@@ -379,12 +379,12 @@ const BookingForm = ({
               ))}
             </select>
             {validationErrors.persons && (
-              <p className="text-red-400 text-sm mt-1" role="alert">{validationErrors.persons}</p>
+              <p className="text-red-400 text-xs sm:text-sm mt-1 leading-tight" role="alert">{validationErrors.persons}</p>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
               WhatsApp Number*
             </label>
             <input
@@ -392,24 +392,24 @@ const BookingForm = ({
               required
               value={formData.whatsapp}
               onChange={handlePhoneChange}
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 sm:py-3 px-3 sm:px-4 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-pink-500"
               placeholder="Enter 10-digit WhatsApp number"
               aria-label="Enter WhatsApp number"
               maxLength={10}
               minLength={10}
             />
             {validationErrors.whatsapp && (
-              <p className="text-red-400 text-sm mt-1" role="alert">{validationErrors.whatsapp}</p>
+              <p className="text-red-400 text-xs sm:text-sm mt-1 leading-tight" role="alert">{validationErrors.whatsapp}</p>
             )}
             {formData.whatsapp.length > 0 && formData.whatsapp.length < 10 && !validationErrors.whatsapp && (
-              <p className="text-yellow-400 text-sm mt-1">
+              <p className="text-yellow-400 text-xs sm:text-sm mt-1 leading-tight">
                 Please enter exactly 10 digits
               </p>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
               Email ID*
             </label>
             <input
@@ -417,22 +417,22 @@ const BookingForm = ({
               required
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 sm:py-3 px-3 sm:px-4 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-pink-500"
               placeholder="Enter email address"
               aria-label="Enter email address"
               maxLength={100}
             />
             {validationErrors.email && (
-              <p className="text-red-400 text-sm mt-1" role="alert">{validationErrors.email}</p>
+              <p className="text-red-400 text-xs sm:text-sm mt-1 leading-tight" role="alert">{validationErrors.email}</p>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
               Do you want decoration?*
             </label>
             {isCoupleVenue ? (
-              <div className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white">
+              <div className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 sm:py-3 px-3 sm:px-4 text-white text-sm sm:text-base">
                 Yes (Mandatory for Couple venue)
               </div>
             ) : (
@@ -445,7 +445,7 @@ const BookingForm = ({
                     decoration: e.target.value === 'yes',
                   })
                 }
-                className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 sm:py-3 px-3 sm:px-4 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-pink-500"
                 aria-label="Select decoration option"
               >
                 <option value="no">No</option>
@@ -455,11 +455,11 @@ const BookingForm = ({
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-between mt-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 sm:justify-between mt-6">
           <button
             type="button"
             onClick={() => navigate('/')}
-            className="bg-gray-700 hover:bg-gray-600 text-white py-3 px-6 rounded-lg transition-colors duration-300 font-bold"
+            className="bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 sm:px-6 rounded-lg transition-colors duration-300 font-bold text-sm sm:text-base"
             aria-label="Go back to home page"
           >
             Back to Home
@@ -477,7 +477,7 @@ const BookingForm = ({
         </div>
 
         {error && (
-          <p className="mt-4 text-red-500 text-center" role="alert">{error}</p>
+          <p className="mt-4 text-red-500 text-xs sm:text-sm text-center leading-tight" role="alert">{error}</p>
         )}
       </form>
     </div>
