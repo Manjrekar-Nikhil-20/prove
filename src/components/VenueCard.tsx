@@ -44,14 +44,12 @@ const VenueCard = ({ venue }: VenueCardProps) => {
       </div>
 
       <div className="p-4 md:p-6 flex-1 flex flex-col">
-        {/* Venue Name and Price - Inline on Desktop, Stacked on Mobile */}
         <div className="mb-4">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-center md:gap-4 space-y-3 md:space-y-0">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-start md:gap-4 space-y-3 md:space-y-0">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center md:text-left">
               {venue.name}
             </h3>
             
-            {/* Price Section - Inline with Name on Desktop */}
             <div className="inline-block px-4 py-3 bg-pink-500/20 text-pink-300 rounded-full mx-auto md:mx-0 flex-shrink-0">
               <div className="flex items-center justify-center gap-1">
                 <IndianRupee className="h-5 w-5 flex-shrink-0" />
@@ -67,7 +65,6 @@ const VenueCard = ({ venue }: VenueCardProps) => {
           </div>
         </div>
 
-        {/* Features Section */}
         <div className="space-y-3 sm:space-y-4 mb-6 flex-1">
           <div className="flex items-start gap-3 text-gray-300">
             <Users className="h-4 md:h-5 w-4 md:w-5 text-pink-500 flex-shrink-0" />
@@ -90,7 +87,6 @@ const VenueCard = ({ venue }: VenueCardProps) => {
           )}
         </div>
 
-        {/* Available Slots Section */}
         <div className="mb-6">
           <h4 className="text-base sm:text-lg text-white font-semibold flex items-center gap-2 mb-4">
             <Clock className="h-4 md:h-5 w-4 md:w-5 text-pink-500" />
@@ -109,7 +105,6 @@ const VenueCard = ({ venue }: VenueCardProps) => {
           </div>
         </div>
 
-        {/* Features List Section */}
         <div className="space-y-4 mb-6">
           <h4 className="text-base sm:text-lg text-white font-semibold flex items-center gap-2">
             <CheckCircle className="h-4 md:h-5 w-4 md:w-5 text-pink-500" />
@@ -128,7 +123,6 @@ const VenueCard = ({ venue }: VenueCardProps) => {
           </ul>
         </div>
 
-        {/* Book Now Button - Always at bottom */}
         <button
           onClick={() => handleBookNow(venue.id)}
           className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 sm:py-4 px-4 rounded-lg transition-colors duration-300 font-bold text-base sm:text-lg mt-auto"
