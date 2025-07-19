@@ -1,142 +1,86 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {
-  Users,
-  Clock,
-  CheckCircle,
-  Monitor,
-  IndianRupee,
-  Sparkles,
-} from 'lucide-react';
+IndianRupee,
+Users,
+MonitorPlay,
+Sparkles,
+Clock,
+} from "lucide-react";
 
-interface VenueCardProps {
-  venue: {
-    id: string;
-    name: string;
-    image: string;
-    price: number;
-    baseMembers: number;
-    screenSize: string;
-    decorationFee: number;
-    slots: string[];
-    features: string[];
-    refundPolicy: string;
-  };
+interface Venue {
+name: string;
+price: number;
+capacity: string;
+screen: string;
+decoration: string;
 }
 
-const VenueCard = ({ venue }: VenueCardProps) => {
-  const navigate = useNavigate();
+interface VenueCardProps {
+venue: Venue;
+id: string;
+}
 
-  const handleBookNow = (venueId: string) => {
-    navigate(`/payment?venue=${venueId}`);
-  };
+export const VenueCard = ({ venue, id }: VenueCardProps) => {
+const navigate = useNavigate();
 
-  return (
-    <div className="group bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden hover:shadow-xl hover:shadow-pink-500/10 transition-all duration-500 h-full flex flex-col">
-      <div className="relative overflow-hidden aspect-video">
-        <img
-          src={venue.image}
-          alt={`${venue.name} - Premium private theater venue`}
-          loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent opacity-60"></div>
-      </div>
-
-      <div className="p-4 md:p-6 flex-1 flex flex-col">
-        <div className="mb-4">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-start md:gap-4 space-y-3 md:space-y-0">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center md:text-left">
-              {venue.name}
-            </h3>
-            
-            <div className="inline-block px-4 py-3 bg-pink-500/20 text-pink-300 rounded-full mx-auto md:mx-0 flex-shrink-0">
-              <div className="flex items-center justify-center gap-1">
-                <IndianRupee className="h-5 w-5 flex-shrink-0" />
-                <span className="text-lg sm:text-xl font-bold">{venue.price}</span>
-              </div>
-              <div className="text-xs sm:text-sm text-center mt-1 leading-tight">
-                {venue.name === 'Aura' && '(for 6 or less people)'}
-                {venue.name === 'Lunar' && '(for 4 or less people)'}
-                {venue.name === 'Minimax' && '(for 8 or less people)'}
-                {venue.name === 'Couple' && '(for 2 people)'}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-3 sm:space-y-4 mb-6 flex-1">
-          <div className="flex items-start gap-3 text-gray-300">
-            <Users className="h-4 md:h-5 w-4 md:w-5 text-pink-500 flex-shrink-0" />
-            <span className="text-sm sm:text-base leading-relaxed">{venue.features[0]}</span>
-          </div>
-          <div className="flex items-start gap-3 text-gray-300">
-            <Monitor className="h-4 md:h-5 w-4 md:w-5 text-pink-500 flex-shrink-0" />
-            <span className="text-sm sm:text-base leading-relaxed">{venue.screenSize}</span>
-          </div>
-          {venue.name === 'Couple' ? (
-            <div className="flex items-start gap-3 text-gray-300">
-              <Sparkles className="h-4 md:h-5 w-4 md:w-5 text-pink-500 flex-shrink-0" />
-              <span className="text-sm sm:text-base leading-relaxed">{venue.features[1]}</span>
-            </div>
-          ) : (
-            <div className="flex items-start gap-3 text-gray-300">
-              <Sparkles className="h-4 md:h-5 w-4 md:w-5 text-pink-500 flex-shrink-0" />
-              <span className="text-sm sm:text-base leading-relaxed">Decoration fee: ₹400</span>
-            </div>
-          )}
-        </div>
-
-        <div className="mb-6">
-          <h4 className="text-base sm:text-lg text-white font-semibold flex items-center gap-2 mb-4">
-            <Clock className="h-4 md:h-5 w-4 md:w-5 text-pink-500" />
-            Available Slots
-          </h4>
-          <div className="space-y-2 sm:space-y-3">
-            {venue.slots.map((slot, index) => (
-              <div
-                key={index}
-                className="text-gray-300 text-sm sm:text-base flex items-center gap-3 bg-gray-700/30 rounded-lg p-3 sm:p-4"
-              >
-                <span className="w-2 h-2 bg-pink-500 rounded-full flex-shrink-0"></span>
-                <span className="leading-relaxed">{slot}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-4 mb-6">
-          <h4 className="text-base sm:text-lg text-white font-semibold flex items-center gap-2">
-            <CheckCircle className="h-4 md:h-5 w-4 md:w-5 text-pink-500" />
-            Features
-          </h4>
-          <ul className="space-y-2 sm:space-y-3">
-            {venue.features.slice(venue.name === 'Couple' ? 2 : 1).map((feature, index) => (
-              <li
-                key={index}
-                className="text-gray-400 text-sm sm:text-base flex items-start gap-3"
-              >
-                <span className="w-1.5 h-1.5 bg-pink-500 rounded-full flex-shrink-0"></span>
-                <span className="leading-relaxed">{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <button
-          onClick={() => handleBookNow(venue.id)}
-          className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 sm:py-4 px-4 rounded-lg transition-colors duration-300 font-bold text-base sm:text-lg mt-auto"
-          aria-label={`Book ${venue.name} venue now`}
-        >
-          Book Now
-        </button>
-
-        <p className="text-gray-400 text-xs sm:text-sm mt-4 text-center leading-relaxed">
-          {venue.refundPolicy}
-        </p>
-      </div>
-    </div>
-  );
+const priceNoteMap: { [key: string]: string } = {
+Aura: "(for 6 or less people)",
+Lunar: "(for 4 or less people)",
+Minimax: "(for 8 or less people)",
+Couple: "(for 2 people)",
 };
 
-export default VenueCard;
+const getPriceNote = (name: string) => {
+return priceNoteMap[name] || "";
+};
+
+return (
+<div className="bg-slate-900 rounded-2xl shadow-lg p-6 flex flex-col gap-4 w-full max-w-full">
+{/* Title and Price Bubble */}
+<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+<h2 className="text-white text-2xl font-bold">{venue.name}</h2>
+
+php-template
+Copy
+Edit
+    <div className="flex flex-wrap items-center gap-2 px-4 py-2 bg-pink-500/20 text-pink-300 rounded-full max-w-full">
+      <div className="flex items-center gap-1">
+        <IndianRupee className="w-4 h-4 flex-shrink-0" />
+        <span className="text-lg font-bold">{venue.price}</span>
+      </div>
+      <span className="text-xs sm:text-sm text-pink-200">
+        {getPriceNote(venue.name)}
+      </span>
+    </div>
+  </div>
+
+  {/* Venue Details */}
+  <div className="flex flex-col gap-2 text-white text-sm sm:text-base">
+    <div className="flex items-center gap-2">
+      <Users className="w-4 h-4 text-pink-400" />
+      <span>{venue.capacity}</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <MonitorPlay className="w-4 h-4 text-pink-400" />
+      <span>{venue.screen}</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <Sparkles className="w-4 h-4 text-pink-400" />
+      <span>{venue.decoration}</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <Clock className="w-4 h-4 text-pink-400" />
+      <span className="font-semibold text-white">Available Slots</span>
+    </div>
+  </div>
+
+  {/* Book Button */}
+  <button
+    onClick={() => navigate(`/booking/${id}`)}
+    className="mt-auto bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition"
+  >
+    Book Now
+  </button>
+</div>
+);
+};
