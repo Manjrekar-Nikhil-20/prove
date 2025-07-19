@@ -44,23 +44,25 @@ const VenueCard = ({ venue }: VenueCardProps) => {
       </div>
 
       <div className="p-4 md:p-6 flex-1 flex flex-col">
-        {/* Venue Name - Centered */}
-        <div className="text-center mb-4">
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3">
-            {venue.name}
-          </h3>
-          
-          {/* Price Section - Centered */}
-          <div className="inline-block px-4 py-3 bg-pink-500/20 text-pink-300 rounded-full">
-            <div className="flex items-center justify-center gap-1">
-              <IndianRupee className="h-5 w-5 flex-shrink-0" />
-              <span className="text-lg sm:text-xl font-bold">{venue.price}</span>
-            </div>
-            <div className="text-xs sm:text-sm text-center mt-1 leading-tight">
-              {venue.name === 'Aura' && '(for 6 or less people)'}
-              {venue.name === 'Lunar' && '(for 4 or less people)'}
-              {venue.name === 'Minimax' && '(for 8 or less people)'}
-              {venue.name === 'Couple' && '(for 2 people)'}
+        {/* Venue Name and Price - Inline on Desktop, Stacked on Mobile */}
+        <div className="mb-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-center md:gap-4 space-y-3 md:space-y-0">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center md:text-left">
+              {venue.name}
+            </h3>
+            
+            {/* Price Section - Inline with Name on Desktop */}
+            <div className="inline-block px-4 py-3 bg-pink-500/20 text-pink-300 rounded-full mx-auto md:mx-0 flex-shrink-0">
+              <div className="flex items-center justify-center gap-1">
+                <IndianRupee className="h-5 w-5 flex-shrink-0" />
+                <span className="text-lg sm:text-xl font-bold">{venue.price}</span>
+              </div>
+              <div className="text-xs sm:text-sm text-center mt-1 leading-tight">
+                {venue.name === 'Aura' && '(for 6 or less people)'}
+                {venue.name === 'Lunar' && '(for 4 or less people)'}
+                {venue.name === 'Minimax' && '(for 8 or less people)'}
+                {venue.name === 'Couple' && '(for 2 people)'}
+              </div>
             </div>
           </div>
         </div>
